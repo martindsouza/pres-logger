@@ -24,7 +24,7 @@
 select sysdate from dual;
 
 
-sqlcl giffy/giffy@localhost:11521/xe 
+sqlcl giffy/giffy@localhost:11521/xe
   set serveroutput on
 ;
 
@@ -61,21 +61,28 @@ cd /Users/giffy/Documents/GitHub/Logger---A-PL-SQL-Logging-Utility/releases/3.0.
 
 -- *** Install ***
 -- Show where to download
-cd /Users/giffy/Documents/GitHub/Logger/releases/3.1.1
+-- TODO: use account on training05 (so it's the en account)
+ssh root@training05.oraopensource.com
+cd /tmp
+git clone https://github.com/oraopensource/logger.git
+cd logger/releases/
+unzip logger_3.1.1.zip
+rlwrap sqlplus ac10/oracle @logger_install.sql
 
-sqlcl giffy/giffy@localhost:11521/xe
+-- cd /Users/giffy/Documents/GitHub/Logger/releases/3.1.1
+-- sqlcl giffy/giffy@localhost:11521/xe
+-- set serveroutput on
+-- @logger_install.sql
 
-set serveroutput on
-@logger_install.sql
 
-
+rlwrap sqlplus giffy/giffy@localhost:11521/xe
 
 
 create or replace procedure logger_demo_cleanup
 as
 begin
   logger.purge_all;
-  logger.set_level('DEBUG');
+  logger.set_level(logger.g_debug);
 
   delete  from logger_logs;
   commit;
@@ -110,6 +117,10 @@ order by id;
 
 
 
+
+
+
+
 -- *** LEVELS ***
 begin
   logger_demo_cleanup;
@@ -117,7 +128,7 @@ begin
   logger.log_error('Error');
   logger.log_warning('Warning');
   logger.log_information('Information');
-  logger.log('debug');
+  logger.log('Debug');
 end;
 /
 
@@ -138,12 +149,12 @@ order by id
 -- Only log Warnings
 begin
   logger_demo_cleanup;
-  logger.set_level('WARNING');
+  logger.set_level(logger.g_warning);
 
   logger.log_error('Error');              -- LOGGED
   logger.log_warning('Warning');          -- LOGGED
   logger.log_information('Information');  -- NOT LOGGED
-  logger.log('debug');                    -- NOT LOGGED
+  logger.log('Debug');                    -- NOT LOGGED
 end;
 /
 
@@ -235,7 +246,7 @@ order by id
 
 begin
   logger_demo_cleanup;
-  logger.set_level('ERROR');
+  logger.set_level(logger.g_error);
 
   logger.log_error('Error');
   logger.log_warning('Warning');
@@ -263,7 +274,7 @@ order by id
 select sys_context('userenv','client_identifier')
 from dual;
 
-exec dbms_session.set_identifier('Martin COUG');
+exec dbms_session.set_identifier('martin-apex-connect');
 
 select sys_context('userenv','client_identifier')
 from dual;
@@ -280,7 +291,7 @@ begin
   logger.log_error('Error', p_scope);
   logger.log_warning('Warning', p_scope);
   logger.log_information('Information', p_scope);
-  logger.log('debug', p_scope);
+  logger.log('Debug', p_scope);
 end logger_test_levels;
 /
 
@@ -289,12 +300,12 @@ end logger_test_levels;
 begin
   logger_demo_cleanup;
   dbms_session.clear_identifier;
-  logger.set_level('ERROR');
+  logger.set_level(logger.g_error);
 end;
 /
 
 -- SQL Developer
-exec logger_test_levels(p_scope => 'sqldev');
+exec logger_test_levels(p_scope => 'In sqldev');
 
 select logger_level, text, time_stamp, scope
 from logger_logs
@@ -308,9 +319,9 @@ order by id
 clear screen
 exec dbms_session.set_identifier('sqlplus');
 
-exec logger.set_level('DEBUG', 'sqlplus');
+exec logger.set_level(logger.g_debug, 'sqlplus');
 
-exec logger_test_levels(p_scope => 'sqlplus');
+exec logger_test_levels(p_scope => 'In sqlplus');
 
 
 select logger_level, text, time_stamp, scope
@@ -320,7 +331,7 @@ order by id
 
 
 -- Back in SQL Dev (just to prove it's still in Error mode)
-exec logger_test_levels(p_scope => 'sqldev');
+exec logger_test_levels(p_scope => 'In sqldev');
 
 select logger_level, text, time_stamp, scope
 from logger_logs
@@ -330,6 +341,9 @@ order by id
 -- In SQL Plus
 exec logger.status;
 -- Highlight the client specific options
+
+select *
+from logger_prefs_by_client_id;
 
 exec logger.unset_client_level_all;
 
@@ -395,6 +409,7 @@ end;
 
 -- In SQL Plus
 begin
+  dbms_session.set_identifier('sqlplus');
   run_long_batch(p_client_id => 'sqlplus', p_iterations => 50);
 end;
 /
@@ -423,7 +438,7 @@ order by id
 
 
 
--- *** ONLY LOG I NECESSARY ***
+-- *** ONLY LOG IF NECESSARY ***
 
 
 create or replace procedure logger_test_loops
@@ -547,9 +562,14 @@ begin
   logger.append_param(l_params, 'p_number', p_number);
   logger.append_param(l_params, 'p_boolean', p_boolean);
   logger.append_param(l_params, 'p_date', p_date);
-  logger.log('Hi', l_scope, null, l_params);
+  logger.log('START', l_scope, null, l_params);
 
   logger.log('END');
+  
+--exception
+--  when others then
+--    logger.log_error('Unhandled Exception', l_scope, null, l_params);
+--    raise;
 end logger_test_params;
 /
 
@@ -572,41 +592,39 @@ order by id
 
 
 
--- **** PLUGINS **** (Not Available Yet)
-
-
-create or replace procedure logger_plugin_demo(p_logger_logs in logger.rec_logger_logs) as
-begin
-  dbms_output.put_line('Logger Plugin. ID: ' || p_logger_logs.id);
-end;
-/
-
-begin
-  logger_demo_cleanup;
-
-  update logger_prefs
-  set pref_value = 'logger_plugin_demo'
-  where 1=1
-    and pref_name = 'PLUGIN_FN_LOG';
-
-  commit;
-end;
-/
-
-
--- MUST do this in order for change to take affect
--- Still work in progress so may not be required
-exec logger_configure;
-
-
-set serveroutput on
-exec logger.log('test w. custom function');
-
-
-select id, logger_level, text, time_stamp
-from logger_logs
-order by id
-;
+-- **** PLUGINS ****
+--create or replace procedure logger_plugin_demo(p_logger_logs in logger.rec_logger_logs) as
+--begin
+--  dbms_output.put_line('Logger Plugin. ID: ' || p_logger_logs.id);
+--end;
+--/
+--
+--begin
+--  logger_demo_cleanup;
+--
+--  update logger_prefs
+--  set pref_value = 'logger_plugin_demo'
+--  where 1=1
+--    and pref_name = 'PLUGIN_FN_LOG';
+--
+--  commit;
+--end;
+--/
+--
+--
+---- MUST do this in order for change to take affect
+---- Still work in progress so may not be required
+--exec logger_configure;
+--
+--
+--set serveroutput on
+--exec logger.log('test w. custom function');
+--
+--
+--select id, logger_level, text, time_stamp
+--from logger_logs
+--order by id
+--;
 
 
 
@@ -616,7 +634,9 @@ order by id
 -- Different views to help you out.
 
 select *
-from logger_logs_5_min;
+from logger_logs_5_min
+order by id desc
+;
 
 select *
 from logger_logs_60_min;

@@ -34,4 +34,5 @@ new-slide-vertical
 - <i class="fa fa-building-o"></i> [Insum Solutions](http://www.insum.ca)
 
 </br>
-Slides: TODO-URL
+- Presentation: [bit.ly/apexconn16-logger](http://bit.ly/apexconn16-logger)
+- Slides: [github.com/martindsouza/pres-logger](https://github.com/martindsouza/pres-logger)

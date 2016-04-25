@@ -11,9 +11,8 @@
 - <i class="fa fa-building-o"></i> [Insum Solutions](http://www.insum.ca)
 
 </br>
-TODO change links
-- Presentation: [bit.ly/vanoug16](http://bit.ly/vanoug16)
-- Slides: [github.com/martindsouza/pres-apex-ent-dev](https://github.com/martindsouza/pres-apex-ent-dev)
+- Presentation: [bit.ly/apexconn16-logger](http://bit.ly/apexconn16-logger)
+- Slides: [github.com/martindsouza/pres-logger](https://github.com/martindsouza/pres-logger)
 
 Notes:
 - [Turn off notes](javascript: Reveal.configure({"showNotes": false}&#41;;)
@@ -31,12 +30,15 @@ Notes:
 new-slide-vertical
 # Agenda
 
-TODO confirm
-
 - Bio
 - History
 - What is Logger
-- New features
-- APEX Integration
+- Demos
 - Future
-- Wrapup
+- Recap
+
+
+new-slide-vertical
+
+<!-- .slide: data-background="#000" -->
+# <i class="fa fa-question fa-3x white"></i>
