@@ -42,6 +42,7 @@ Information | `logger.log_information` | 1%
 Debug |  `logger.log` | 90%
 Off | _N/A_ | _N/A_
 
+</br>
 More Info: [Best Practices](https://github.com/OraOpenSource/Logger/blob/master/docs/Best%20Practices.md)
 
 new-slide-vertical

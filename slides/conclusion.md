@@ -1,27 +1,37 @@
-## Future Meetings
+# Future
 
-- Aiming for monthly meetings
-- Want to know what you'd like to see
-  - Create issue on <i class="fa fa-github"></i> [future-meetings](https://github.com/orclapex-yyc/future-meetings)
-    - Indicate if you'd like to present
+- Open source
+  - You get to decide
+- Can follow on project's [issues page](https://github.com/OraOpenSource/Logger/issues)
+  - Suggest new features!
 
-new-slide-vertical
-
-# Logo
-
-Make your mark!
 
 new-slide-vertical
 
-# <i class="fa fa-question-circle fa-2x"></i>
+# Recap
+
+new-slide-vertical
+
+## Logger URLs
+
+</br>
+<p class="no-bullet"></p>
+- <i class="fa fa-github"></i> [Logger](https://github.com/OraOpenSource/Logger)
+- <i class="fa fa-code"></i> [API](https://github.com/OraOpenSource/Logger/blob/master/docs/Logger%20API.md)
+- <i class="fa fa-book"></i> [Best Practices](https://github.com/OraOpenSource/Logger/blob/master/docs/Best%20Practices.md)
+- <i class="fa fa-book"></i> [Install Guide](https://github.com/OraOpenSource/Logger/blob/master/docs/Installation.md)
+
+
+new-slide-vertical
+
+# `end;`
 
 <p class="no-bullet"></p>
-- <i class="fa fa-users"></i> [Meetup](http://www.meetup.com/orclapex-YYC/)
-- <i class="fa fa-github"></i> [orclapex-yyc](https://github.com/orclapex-yyc)
+- <i class="fa fa-github"></i> [Logger](https://github.com/OraOpenSource/Logger)
+- <i class="fa fa-twitter"></i> [martindsouza](https://twitter.com/martin)
+- <i class="fa fa-rss"></i> [www.talkapex.com](http://www.talkapex.com)
+- <i class="fa fa-envelope-o"></i> [mdsouza@insum.ca](mailto:mdsouza@insum.ca)
+- <i class="fa fa-building-o"></i> [Insum Solutions](http://www.insum.ca)
 
-<hr>
-
-<p class="no-bullet"></p>
-- <i class="fa fa-twitter"></i> [martindsouza](https://twitter.com/martindsouza)
-- <i class="fa fa-rss"></i> [talkapex.com](http://www.talkapex.com)
-- <i class="fa fa-github"></i> [martindsouza](https://github.com/martindsouza)
+</br>
+Slides: TODO-URL

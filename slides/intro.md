@@ -1,6 +1,6 @@
 ## Just Log It
 
-### Instrument PL/SQL and APEX
+#### <span style="font-style:italic">Instrument PL/SQL and APEX Code  </span>
 
 </br>
 <p class="no-bullet"></p>
@@ -40,16 +40,3 @@ TODO confirm
 - APEX Integration
 - Future
 - Wrapup
-
-new-slide-vertical
-
-# Presented By
-
-Martin Giffy D'Souza
-
-![aced](www/img/logo-aced.png)<!-- .element: class="logo-aced" -->
-
-<p class="no-bullet"></p>
-- <i class="fa fa-twitter"></i> [martindsouza](https://twitter.com/martindsouza)
-- <i class="fa fa-rss"></i> [talkapex.com](http://www.talkapex.com)
-- <i class="fa fa-github"></i> [martindsouza](https://github.com/martindsouza)
