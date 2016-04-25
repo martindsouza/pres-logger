@@ -41,5 +41,4 @@ new-slide-vertical
 
 new-slide-vertical
 
-<!-- .slide: data-background="#000" -->
-# <i class="fa fa-question fa-3x white"></i>
+# <i class="fa fa-question fa-3x"></i>
