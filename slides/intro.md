@@ -23,19 +23,23 @@ Notes:
 new-slide-vertical
 <!-- .slide: data-background="./www/img/mh370.jpg" -->
 
-> <span style="position: absolute; top:315px; right: -400px;width: 1300px;">"The search for Flight 370 is the most expensive search operation in aviation history"</span><!-- .element: class="fragment" data-fragment-index="1" -->
+> "The search for Flight 370 is the most expensive search operation in aviation history"<!-- .element: class="fragment" data-fragment-index="1" style="position: absolute; top:260px; right: -400px;width: 1300px;" -->
 
 Notes:
 - Disappeared on 8 March 2014
-- 
+-
 new-slide-vertical
 # Agenda
 
+TODO confirm
 
-- Intro
-- APEX 5
-- APEX Resources
-- Wrap up
+- Bio
+- History
+- What is Logger
+- New features
+- APEX Integration
+- Future
+- Wrapup
 
 new-slide-vertical
 
