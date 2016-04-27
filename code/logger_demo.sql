@@ -400,7 +400,7 @@ end run_long_batch;
 -- Setup
 begin
   logger_demo_cleanup;
-  logger.set_level('ERROR'); -- Simulates Production
+  logger.set_level(logger.g_error); -- Simulates Production
   logger.unset_client_level_all;
 end;
 /
